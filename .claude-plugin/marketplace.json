@@ -1,0 +1,12 @@
+{
+  "name": "ai-team-brain",
+  "owner": { "name": "islam543" },
+  "metadata": { "description": "Claude Code plugins for an AI team's shared knowledge page in Confluence." },
+  "plugins": [
+    {
+      "name": "ai-team-kb",
+      "source": "./plugins/ai-team-kb",
+      "description": "Shared team knowledge page in Confluence: loads an index of a local copy at session start, checks relevance on each prompt, adds lines only with your yes."
+    }
+  ]
+}
