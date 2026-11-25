@@ -7,7 +7,7 @@ Connects Claude Code to one shared Confluence page where a team lists projects, 
 - **Session start:** prints the rules and a local copy of the page (`~/.claude/ai-team-kb/page.md`). No network call, no token.
 - **Every prompt:** a one-line reminder. Claude checks whether the request touches a project, finding, dataset or link between projects; if not, it ignores the page.
 - **Writing:** Claude matches the work against the entries first, drafts one line and asks you. Only on your yes, it adds the line to the page's Inbox with a targeted edit (never a resend of the whole page).
-- **Skills:** `/ai-team-kb:kb-harvest` drafts lines from your memory notes, project docs and recent sessions (first run 60 days, then since the last run, so it can run daily). `/ai-team-kb:kb-sort` is for the page owner and moves Inbox lines into their sections.
+- **Skills:** `/ai-team-kb:kb-harvest` drafts lines from your memory notes, project docs, findings and sessions (first run: every company project, all time, shown 15 lines at a time; then only what is new since the last run, so it can run daily). `/ai-team-kb:kb-sort` is for the page owner and moves Inbox lines into their sections.
 
 ## Needs
 
