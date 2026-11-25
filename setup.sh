@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Set up the ai-team-kb plugin on this computer. Mac or Linux terminal, or Git Bash on Windows.
-#   bash setup.sh "<team Confluence page link>"
+#   bash setup.sh                 (uses the team page, AI Team Knowledge: https://qicbizdev.atlassian.net/wiki/x/GwADy)
+#   bash setup.sh "<page link>"   (only to point at a different page)
 # Safe to run again: it updates what is already there. In order, it:
 #   1. finds Claude Code's command-line tool (on PATH, or inside the Claude desktop app on a Mac)
 #   2. adds this repo as the "ai-team-brain" plugin marketplace, or refreshes it
@@ -8,13 +9,11 @@
 #   4. turns on auto-update for ai-team-brain in your Claude settings.json (backup first)
 #   5. removes the older zip install if it is there (backups first; page link and local copy kept)
 #   6. prints a short check
-# The page link is stored only in your own Claude settings, never in this repo.
+# The page link is saved in your Claude settings; the page itself stays in Confluence, restricted to team members.
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
-URL="${1:-}"
-if [ -z "$URL" ]; then
-  echo "usage: bash setup.sh \"<team Confluence page link>\"  (ask the page owner for the link)" >&2; exit 2
-fi
+TEAM_PAGE="https://qicbizdev.atlassian.net/wiki/x/GwADy"   # AI Team Knowledge (Confluence)
+URL="${1:-$TEAM_PAGE}"
 case "$URL" in
   https://*.atlassian.net/wiki/*) ;;
   *) echo "Not a Confluence page link: $URL" >&2; exit 2 ;;

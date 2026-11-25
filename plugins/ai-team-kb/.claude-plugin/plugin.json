@@ -1,14 +1,17 @@
 {
   "name": "ai-team-kb",
   "description": "Connects Claude to one shared Confluence page where a team lists projects, findings and datasets others can reuse. Loads a local copy at session start, checks relevance on each prompt, and adds lines only with your yes, as targeted edits.",
-  "author": { "name": "islam543" },
+  "author": {
+    "name": "islam543"
+  },
   "repository": "https://github.com/islam543/AI-Team-Brain",
   "license": "MIT",
   "userConfig": {
     "page_url": {
       "type": "string",
       "title": "Team Confluence page link",
-      "description": "Link to your team's knowledge page in Confluence (ask the page owner). Stored in your own settings, never in this repo."
+      "description": "Link to the team's AI Team Knowledge page in Confluence. The default is the team page; change it only to use a different page.",
+      "default": "https://qicbizdev.atlassian.net/wiki/x/GwADy"
     }
   }
 }

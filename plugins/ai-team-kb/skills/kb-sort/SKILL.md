@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Sort the AI Team Knowledge Inbox
 
-1. Fetch the page (link: first line of `~/.claude/ai-team-kb/page_url`) with the Atlassian connector as HTML, draft, full detail. If the Inbox holds only "(empty)", say so and stop. Check that `updateConfluenceContent` offers `edits`; if not, stop.
+1. Fetch the page (link: first line of `~/.claude/ai-team-kb/page_url`, or the team page https://qicbizdev.atlassian.net/wiki/x/GwADy) with the Atlassian connector as HTML, draft, full detail. If the Inbox holds only "(empty)", say so and stop. Check that `updateConfluenceContent` offers `edits`; if not, stop.
 2. For each Inbox line, propose one action and show them all numbered, then wait for the owner's answer:
    - **Move** to Projects, Findings or Datasets (the Datasets section is inside a dropdown).
    - **Merge** an "Update to <title>" line into that entry: show the merged entry text, at most 300 characters, keeping the facts of both, date set to today.

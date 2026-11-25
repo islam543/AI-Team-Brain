@@ -1,6 +1,6 @@
 # ai-team-kb
 
-Connects Claude Code to one shared Confluence page where a team lists projects, findings and datasets that someone else could reuse. The page itself, its link and its content stay in your company's Confluence; nothing from it is stored in this repo.
+Connects Claude Code to one shared Confluence page where a team lists projects, findings and datasets that someone else could reuse. Team page: [AI Team Knowledge](https://qicbizdev.atlassian.net/wiki/x/GwADy) (Confluence, restricted to team members). The repo holds its link; the page content stays in Confluence.
 
 ## What it does
 
@@ -18,7 +18,7 @@ Connects Claude Code to one shared Confluence page where a team lists projects, 
 
 ```bash
 claude plugin marketplace add islam543/AI-Team-Brain
-claude plugin install ai-team-kb@ai-team-brain --config page_url="<your team page link>"
+claude plugin install ai-team-kb@ai-team-brain --config page_url="https://qicbizdev.atlassian.net/wiki/x/GwADy"
 ```
 
 Or in a Claude session: `/plugin`, add the marketplace `islam543/AI-Team-Brain`, install `ai-team-kb`, and paste the page link when asked.

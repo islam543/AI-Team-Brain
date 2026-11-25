@@ -5,6 +5,7 @@
 # Portable: Mac, Linux and Git Bash on Windows (no stat, no date maths).
 ROOT="${CLAUDE_PLUGIN_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
 KB="${AI_TEAM_KB:-$HOME/.claude/ai-team-kb}"
+TEAM_PAGE="https://qicbizdev.atlassian.net/wiki/x/GwADy"   # AI Team Knowledge (Confluence), used when no link is set
 mkdir -p "$KB" 2>/dev/null || exit 0
 for f in html_to_copy.py check_page.py find_python.sh refresh.sh register_hooks.py remove_old_install.sh; do
   cp -f "$ROOT/tools/$f" "$KB/$f" 2>/dev/null
@@ -22,6 +23,7 @@ if [ -n "$URL" ]; then
 elif [ -f "$KB/page_url" ]; then
   URL="$(head -n 1 "$KB/page_url" | tr -d '\r')"
 fi
+URL="${URL:-$TEAM_PAGE}"
 
 cat "$ROOT/rules.md"
 # Auto-update is off by default for this marketplace: say so, so Claude can offer to turn it on.
@@ -36,10 +38,6 @@ if [ "$AU" = "off" ]; then
   echo "- **Auto-update is off** for ai-team-brain on this computer, so changes in the repo do not arrive by themselves. Tell the user once and, with their yes, set \"autoUpdate\": true on the ai-team-brain entry under extraKnownMarketplaces in $SET (or: /plugin, Marketplaces, ai-team-brain, enable auto-update)."
 fi
 echo
-if [ -z "$URL" ]; then
-  echo "AI Team Knowledge: the page link is not set. At the first relevant prompt, ask the user for it (from the team's Confluence), then run: claude plugin configure ai-team-kb@ai-team-brain (or save it with: printf '%s\n' '<link>' > ~/.claude/ai-team-kb/page_url)."
-  exit 0
-fi
 if [ ! -f "$KB/page.md" ]; then
   echo "AI Team Knowledge page: $URL. No local copy yet: at the first relevant prompt, fetch the page as HTML with the Atlassian connector, save it to a temp file and run: bash ~/.claude/ai-team-kb/refresh.sh <file>"
   exit 0
