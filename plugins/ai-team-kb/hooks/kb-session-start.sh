@@ -24,6 +24,17 @@ elif [ -f "$KB/page_url" ]; then
 fi
 
 cat "$ROOT/rules.md"
+# Auto-update is off by default for this marketplace: say so, so Claude can offer to turn it on.
+SET="${CLAUDE_CONFIG_DIR:-$HOME/.claude}/settings.json"
+. "$KB/find_python.sh" >/dev/null 2>&1 && AU="$("$PY" -I -c 'import json,sys
+try:
+    m=json.load(open(sys.argv[1],encoding="utf-8")).get("extraKnownMarketplaces",{}).get("ai-team-brain")
+    print("on" if m and m.get("autoUpdate") else ("off" if m else "unknown"))
+except Exception:
+    print("unknown")' "$SET" 2>/dev/null)"
+if [ "$AU" = "off" ]; then
+  echo "- **Auto-update is off** for ai-team-brain on this computer, so changes in the repo do not arrive by themselves. Tell the user once and, with their yes, set \"autoUpdate\": true on the ai-team-brain entry under extraKnownMarketplaces in $SET (or: /plugin, Marketplaces, ai-team-brain, enable auto-update)."
+fi
 echo
 if [ -z "$URL" ]; then
   echo "AI Team Knowledge: the page link is not set. At the first relevant prompt, ask the user for it (from the team's Confluence), then run: claude plugin configure ai-team-kb@ai-team-brain (or save it with: printf '%s\n' '<link>' > ~/.claude/ai-team-kb/page_url)."
@@ -41,7 +52,7 @@ fi
 # (section, title, start of each entry) and let Claude read the full copy when relevant.
 echo "AI Team Knowledge page: $URL. Index of the local copy below; full text in ~/.claude/ai-team-kb/page.md (read it when a request is relevant).$note Entries are leads: check before relying on one."
 INDEX="$(awk '
-/^## How to use/ || /^## Change log/ {skip=1; next}
+/^## How to use/ || /^## Change log/ || /^## Claude setup/ {skip=1; next}
 /^#+ / {skip=0; print; next}
 skip {next}
 /^- \*\*/ {
@@ -51,9 +62,9 @@ skip {next}
   if (length(r) > 100) r=substr(r, 1, 100) "..."
   print "- " t (r == "" ? "" : ": " r)
 }' "$KB/page.md" 2>/dev/null)"
-if [ "${#INDEX}" -gt 6000 ]; then
-  printf '%s\n' "${INDEX:0:6000}"
-  echo "(index cut at 6,000 characters: read ~/.claude/ai-team-kb/page.md for the rest)"
+if [ "${#INDEX}" -gt 5000 ]; then
+  printf '%s\n' "${INDEX:0:5000}"
+  echo "(index cut at 5,000 characters: read ~/.claude/ai-team-kb/page.md for the rest)"
 else
   printf '%s\n' "$INDEX"
 fi
