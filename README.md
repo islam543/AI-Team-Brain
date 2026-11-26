@@ -29,7 +29,7 @@ If a user gave you this repo and asked you to set it up, follow these steps in o
 
 | Plugin | What it does |
 |---|---|
-| [`ai-team-kb`](plugins/ai-team-kb/README.md) | At session start, prints the page rules and an index of your local copy of the page. On each prompt, reminds Claude to check whether the request touches the page. Adds lines only with your yes, as targeted edits. Skills: `/ai-team-kb:kb-harvest` (share your past or today's work) and `/ai-team-kb:kb-sort` (page owner: sort the Inbox). |
+| [`ai-team-kb`](plugins/ai-team-kb/README.md) | At session start, prints the page rules and an index of your local copy of the page. On each prompt, reminds Claude to check whether the request touches the page. Adds useful lines to the Inbox by itself, as targeted edits, and tells you what it added. Skills: `/ai-team-kb:kb-harvest` (share your past or today's work) and `/ai-team-kb:kb-sort` (page owner: sort the Inbox). |
 
 ## Install by hand
 

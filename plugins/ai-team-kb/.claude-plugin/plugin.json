@@ -1,6 +1,6 @@
 {
   "name": "ai-team-kb",
-  "description": "Connects Claude to one shared Confluence page where a team lists projects, findings and datasets others can reuse. Loads a local copy at session start, checks relevance on each prompt, and adds lines only with your yes, as targeted edits.",
+  "description": "Connects Claude to one shared Confluence page where a team lists projects, findings and datasets others can reuse. Loads a local copy at session start, checks relevance on each prompt, and adds useful lines to the Inbox by itself, as targeted edits.",
   "author": {
     "name": "islam543"
   },
